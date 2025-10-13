@@ -42,7 +42,7 @@ watch(isChecked, onChangeCompleted);
     <article :class="[$style.todoItem, { [$style.checked]: isChecked }]">
       <input type="checkbox" :id v-model="isChecked" />
       <label :for="id">{{ props.title }}</label>
-      <button type="button" @click="onDeleteTodo">Удалить</button>
+      <button type="button" @click="onDeleteTodo">Delete</button>
     </article>
   </li>
 </template>
