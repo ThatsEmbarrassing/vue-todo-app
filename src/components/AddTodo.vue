@@ -28,7 +28,7 @@ function addTodo() {
 
 <template>
   <form @submit.prevent="addTodo">
-    <input type="text" v-model="title" name="title" placeholder="Введите название таски" />
+    <input type="text" v-model="title" name="title" placeholder="Insert task's name" />
     <button type="submit">Add</button>
   </form>
 </template>

@@ -25,6 +25,8 @@ function onDeleteTodo(todoId: string) {
 
 <style module>
 .todoList {
+  list-style: none;
+  padding: 0;
 }
 </style>
 
