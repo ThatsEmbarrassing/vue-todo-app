@@ -1,28 +1,16 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
-import { v4 as uuidv4 } from "uuid";
-
-import type { TodoItem } from "../data";
-
-const emit = defineEmits<{
-  addTodo: [todo: TodoItem];
-}>();
+import { useTodosStore } from "@/stores";
 
 const title = ref<string>();
+
+const todosStore = useTodosStore();
 
 function addTodo() {
   if (!title.value) return;
 
-  const newTodo: TodoItem = {
-    id: uuidv4(),
-    title: title.value,
-    completed: false,
-  };
-
-  emit("addTodo", newTodo);
-
-  title.value = "";
+  todosStore.addTodo(title.value);
 }
 </script>
 

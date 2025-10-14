@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { ref, useId, watch } from "vue";
 
-import type { TodoItem as Props } from "../data";
+import type { TodoItem as Props } from "@/stores";
 
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
-  changeCompleted: [value: boolean];
+  change: [previous: Props, current: Omit<Props, "id">];
   delete: [todoId: string];
 }>();
 
@@ -17,15 +17,15 @@ const isChecked = ref(props.completed);
  */
 const id = useId();
 
-function onChangeCompleted() {
-  emit("changeCompleted", isChecked.value);
+function onChangeTodo(update: Omit<Props, "id">) {
+  emit("change", props, update);
 }
 
 function onDeleteTodo() {
   emit("delete", props.id);
 }
 
-watch(isChecked, onChangeCompleted);
+watch(isChecked, (value) => onChangeTodo({ ...props, completed: value }));
 </script>
 
 <style module>

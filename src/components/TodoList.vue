@@ -1,26 +1,9 @@
 <script lang="ts" setup>
+import { useTodosStore } from "@/stores";
+
 import TodoItem from "./TodoItem.vue";
 
-import type { TodoItem as TodoItemProps } from "../data";
-
-interface Props {
-  todos: TodoItemProps[];
-}
-
-defineProps<Props>();
-
-const emit = defineEmits<{
-  changeCompleted: [value: boolean, item: TodoItemProps];
-  deleteTodo: [todoId: string];
-}>();
-
-function onChangeCompleted(value: boolean, item: TodoItemProps) {
-  emit("changeCompleted", value, item);
-}
-
-function onDeleteTodo(todoId: string) {
-  emit("deleteTodo", todoId);
-}
+const store = useTodosStore();
 </script>
 
 <style module>
@@ -33,11 +16,11 @@ function onDeleteTodo(todoId: string) {
 <template>
   <ul :class="$style.todoList">
     <todo-item
-      v-for="item in todos"
+      v-for="item in store.todos"
       :="item"
       :key="item.id"
-      @change-completed="(value) => onChangeCompleted(value, item)"
-      @delete="onDeleteTodo"
+      @change="store.changeTodo"
+      @delete="store.deleteTodo"
     />
   </ul>
 </template>
