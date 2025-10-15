@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, useId, watch } from "vue";
+import { computed, useId } from "vue";
 
 import type { TodoItem as Props } from "@/stores";
 
@@ -10,7 +10,32 @@ const emit = defineEmits<{
   delete: [todoId: string];
 }>();
 
-const isChecked = ref(props.completed);
+/**
+ * ! NOTE FOR MYSELF:
+ *
+ * Before, the `isChecked` was written like:
+ *
+ * ```ts
+ * const isChecked = ref(props.completed);
+ * watch(isChecked, (value) => onChangeTodo({ ...props, completed: value }));
+ * ```
+ *
+ * But this made the component lose its reactivity behaviour. Why?
+ * ref takes a value from `props.completed` at the current moment
+ * and does NOT follow up with its changes.
+ *
+ * Its main function is making other things react to its changes, NOT follow up with others itself.
+ * In short, if the `props.completed` changes, the `isChecked` will not!
+ *
+ * Use writable `computed` if you need to watch for source value and do something when it's updated.
+ * This makes objects truly reactive. Therefore, it just looks better :)
+ */
+const isChecked = computed({
+  get: () => props.completed,
+  set: (value) => {
+    onChangeTodo({ ...props, completed: value });
+  },
+});
 
 /**
  * * Unique id for input and its label
@@ -24,8 +49,6 @@ function onChangeTodo(update: Omit<Props, "id">) {
 function onDeleteTodo() {
   emit("delete", props.id);
 }
-
-watch(isChecked, (value) => onChangeTodo({ ...props, completed: value }));
 </script>
 
 <style module>
