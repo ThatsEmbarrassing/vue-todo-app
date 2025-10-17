@@ -1,0 +1,18 @@
+html {
+  font-family: "Ubuntu Sans", system-ui, sans-serif;
+  font-size: 16pt;
+  color: var(--text-color);
+}
+
+* {
+  font-size: 16pt;
+}
+
+body {
+  min-height: 100dvh;
+  padding: 10px;
+  background-color: var(--background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import { computed, useId } from "vue";
 
+import { VTrash } from "@/icons";
+
+import VCheckbox from "./VCheckbox.vue";
+
 import type { TodoItem as Props } from "@/stores";
 
 const props = defineProps<Props>();
@@ -53,19 +57,54 @@ function onDeleteTodo() {
 
 <style module>
 .todoItem {
+  margin-bottom: 10px;
+  padding: 0 16px;
+  background-color: var(--primary-color);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
 }
 
-.checked {
+.label {
+  padding: 15px;
+  padding-right: 0;
+  flex-grow: 1;
+  user-select: none;
+}
+
+.label.disabled {
+  color: var(--secondary-color);
   text-decoration: line-through;
+  text-decoration-color: var(--secondary-color);
+}
+
+.delete {
+  padding: 3px;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.delete svg {
+  --icon-color: var(--secondary-color);
+}
+
+.delete:hover svg {
+  --icon-color: #ff0033;
 }
 </style>
 
 <template>
   <li>
-    <article :class="[$style.todoItem, { [$style.checked]: isChecked }]">
-      <input type="checkbox" :id v-model="isChecked" />
-      <label :for="id">{{ props.title }}</label>
-      <button type="button" @click="onDeleteTodo">Delete</button>
+    <article :class="$style.todoItem">
+      <VCheckbox v-model="isChecked" :id />
+      <label :for="id" :class="[$style.label, { [$style.disabled]: isChecked }]">{{ title }}</label>
+      <button type="button" :class="$style.delete" @click="onDeleteTodo">
+        <VTrash />
+      </button>
     </article>
   </li>
 </template>
