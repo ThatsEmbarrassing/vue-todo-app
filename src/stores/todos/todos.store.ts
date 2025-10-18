@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 import { v4 as uuidv4 } from "uuid";
 
-import defaultState from "./todos.state";
+import state from "./todos.state";
 
 import type { TodoItem } from "./todos.model";
 
@@ -13,7 +13,7 @@ const createTodo = (title: string): TodoItem => ({
 });
 
 export const useTodosStore = defineStore("todos", {
-  state: () => defaultState,
+  state,
   actions: {
     addTodo(title: string) {
       this.todos = [...this.todos, createTodo(title)];
