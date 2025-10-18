@@ -8,8 +8,12 @@ const title = ref<string>();
 
 const todosStore = useTodosStore();
 
-function addTodo() {
+function addTodo(event: SubmitEvent) {
   if (!title.value) return;
+
+  const { target } = event as SubmitEvent & { target: HTMLFormElement };
+
+  target.reset();
 
   todosStore.addTodo(title.value);
 }
