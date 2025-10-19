@@ -7,6 +7,7 @@ Features:
 - Make new todos
 - Complete and uncomplete todos
 - Delete existing todos.
+- Switch theme.
 
 # Getting Started
 
