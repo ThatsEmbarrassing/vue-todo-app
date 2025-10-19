@@ -63,6 +63,8 @@ function onDeleteTodo() {
   border-radius: 15px;
   display: flex;
   align-items: center;
+  color: var(--text-color);
+  transition: 0.2s ease;
 }
 
 .label {
@@ -70,12 +72,19 @@ function onDeleteTodo() {
   padding-right: 0;
   flex-grow: 1;
   user-select: none;
+  color: var(--text-color);
+  text-decoration: line-through;
+  text-decoration-color: transparent;
+  transition:
+    color 0.2s ease,
+    text-decoration 0.2s ease;
 }
 
 .label.disabled {
   color: var(--secondary-color);
   text-decoration: line-through;
   text-decoration-color: var(--secondary-color);
+  transition: 0.2s ease;
 }
 
 .delete {
@@ -90,6 +99,7 @@ function onDeleteTodo() {
 
 .delete svg {
   --icon-color: var(--secondary-color);
+  transition: 0.2s ease;
 }
 
 .delete:hover svg {

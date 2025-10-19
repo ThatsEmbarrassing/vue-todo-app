@@ -1,5 +1,19 @@
 <script setup lang="ts">
+import { useThemeStore } from "@/stores";
+
+import { watch } from "vue";
 import { AddTodo, TodoList } from "./components";
+import ThemeSwitcher from "./components/ThemeSwitcher.vue";
+
+const themeStore = useThemeStore();
+
+watch(
+  () => themeStore.theme,
+  (value) => {
+    document.body.className = value;
+  },
+  { immediate: true },
+);
 </script>
 
 <style lang="css" src="./styles/index.css"></style>
@@ -35,6 +49,13 @@ import { AddTodo, TodoList } from "./components";
   gap: 10px;
 }
 
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 20px;
+}
+
 @keyframes gradient {
   0% {
     background-position: 0% 50%;
@@ -46,7 +67,10 @@ import { AddTodo, TodoList } from "./components";
 </style>
 
 <template>
-  <h1 :class="$style.h1">Todo App</h1>
+  <header :class="$style.header">
+    <h1 :class="$style.h1">Todo App</h1>
+    <ThemeSwitcher />
+  </header>
   <div :class="$style.wrapper">
     <AddTodo />
     <TodoList />

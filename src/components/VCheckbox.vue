@@ -40,6 +40,7 @@ function toggle() {
 
 .checkbox svg {
   display: flex;
+  transition: 0.2s ease;
 }
 </style>
 

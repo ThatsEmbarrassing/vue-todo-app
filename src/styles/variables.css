@@ -1,4 +1,12 @@
-:root {
+.light {
+  --background: hsl(45, 11%, 93%);
+  --primary-color: hsl(36, 8%, 88%);
+  --secondary-color: hsl(46, 8%, 68%);
+  --accent-color: hsl(275, 96%, 64%);
+  --text-color: hsl(0, 0%, 2%);
+}
+
+.dark {
   --background: hsl(225, 11%, 7%);
   --primary-color: hsl(225, 7%, 12%);
   --secondary-color: hsl(226, 8%, 32%);
